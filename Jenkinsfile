@@ -20,14 +20,14 @@ pipeline {
             }
         }
 
-        stage("build & SonarQube analysis") {
-            agent any
+        stage('Scan') {
             steps {
-              withSonarQubeEnv('My SonarQube Server') {
+              withSonarQubeEnv(installationName: 'sq1') {
                 sh 'mvn clean package sonar:sonar'
               }
             }
           }
+        
           stage("Quality Gate") {
             steps {
               timeout(time: 1, unit: 'HOURS') {
