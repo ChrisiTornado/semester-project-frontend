@@ -1,7 +1,6 @@
 pipeline {
     agent any
     
-    tools {node "node"}
     stages {
         stage('Checkout') {
             steps {
@@ -11,7 +10,14 @@ pipeline {
         }
         
         stage('Lint') {
+            environment {
+                // Define the NodeJS installation to use in this stage
+                nodejsInstallation = 'node' // This should match the NodeJS installation name in Jenkins
+            }
             steps {
+                // Use the NodeJS installation defined above
+                tool name: nodejsInstallation, type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+                
                 sh 'npm ci'
                 sh 'npm run lint'
             }
