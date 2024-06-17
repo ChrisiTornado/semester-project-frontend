@@ -13,6 +13,7 @@ pipeline {
         }
         
         stage('Lint') {
+            steps {
                 sh 'npm ci'
                 sh 'npm run lint'
             }
