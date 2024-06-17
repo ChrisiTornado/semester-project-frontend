@@ -20,21 +20,17 @@ pipeline {
             }
         }
 
-        stage('Scan') {
-            steps {
-              withSonarQubeEnv(installationName: 'sq1') {
-                sh 'npm ci'
-              }
+        stage('SonarQube analysis') {
+            environment {
+                SCANNER_HOME = tool 'SonarQubeScanner';    
             }
-          }
-        
-          stage("Quality Gate") {
+            
             steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
+                
+                withSonarQubeEnv('SonarQube') {
+                    sh "${SCANNER_HOME}/bin/sonar-scanner"
+                }
             }
-          }
             
         stage('Deploy') {
             steps {
