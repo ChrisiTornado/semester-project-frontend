@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'linux' }
     tools {
         nodejs '22.3.0'
         maven '3.9.8' 
