@@ -31,14 +31,15 @@ pipeline {
                     sh "${SCANNER_HOME}/bin/sonar-scanner"
                 }
             }
-            
+        }
+        
         stage('Deploy') {
             steps {
                 sh 'echo Deploying...'
                 // Additional deployment steps can go here
             }
         }
-    }
+    
     
     post {
         success {
