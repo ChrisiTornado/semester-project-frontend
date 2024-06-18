@@ -39,33 +39,6 @@ pipeline {
             }
         }
 
-        stage('Install sudo') {
-            steps {
-                sh '''
-                # Install sudo if not installed
-                apt-get update
-                apt-get install -y sudo
-                '''
-            }
-        }
-
-        stage('Install Docker') {
-            steps {
-                sh '''
-                # Install Docker
-                curl -fsSL https://get.docker.com -o get-docker.sh
-                sh get-docker.sh
-
-                # Add jenkins user to the docker group
-                sudo usermod -aG docker jenkins
-
-                # Start Docker service
-                sudo systemctl start docker
-                sudo systemctl enable docker
-                '''
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'docker build -t chrisitornado/todos-frontend:latest .'
