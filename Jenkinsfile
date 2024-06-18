@@ -2,7 +2,9 @@ pipeline {
     agent any
     tools {
         nodejs '22.3.0'
-        maven '3.9.8'
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('chrisitornado-dockerhub')
     }
     
     stages {
@@ -36,11 +38,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Build') {
+            steps {
+                sh 'docker build -t chrisitornado/todos-frontend:latest .'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --pasword-stdin'
+            }
+        }
         
         stage('Deploy') {
             steps {
-                sh 'echo Deploying...'
-                // Additional deployment steps can go here
+                sh 'echo docker push chrisitornado/todos-frontend:latest'
             }
         }
     }
@@ -51,6 +64,9 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed! 😞'
+        }
+        always {
+            sh 'docker logout'
         }
     }
 }
