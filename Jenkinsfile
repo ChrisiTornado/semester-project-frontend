@@ -3,6 +3,7 @@ pipeline {
     tools {
         nodejs '22.3.0'
     }
+    
     environment {
         DOCKERHUB_CREDENTIALS = credentials('chrisitornado-dockerhub')
     }
