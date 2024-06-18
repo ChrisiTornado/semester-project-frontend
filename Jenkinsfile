@@ -60,5 +60,8 @@ pipeline {
         failure {
             echo 'Pipeline failed! 😞'
         }
+        always {
+            sh 'docker logout'
+        }
     }
 }
