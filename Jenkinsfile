@@ -22,7 +22,7 @@ pipeline {
 
         stage('Scan') {
             steps {
-                withSonarQubeEnv(installationName: 'sq1') {
+                withSonarQubeEnv('sonar') {
                     sh 'npm ci'
                     sh 'npm i sonar-scanner'
                     sh 'npm run sonar'
