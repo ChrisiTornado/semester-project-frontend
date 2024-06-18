@@ -24,8 +24,7 @@ pipeline {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {
                     sh 'npm ci'
-                    sh 'npm i sonar-scanner'
-                    sh 'npm run sonar'
+                    sh 'npm run sonar-scanner'
                 }
             }
         }
