@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         nodejs '22.3.0'
-        maven '3.9.8' 
+        maven '3.9.8'
     }
     
     stages {
@@ -22,18 +22,17 @@ pipeline {
 
         stage('Scan') {
             steps {
-              withSonarQubeEnv(installationName: 'sq1') {
-                sh 'npm ci'
-              }
+                withSonarQubeEnv(installationName: 'sq1') {
+                    sh 'npm ci'
+                }
             }
-          }
+        }
 
-        stage("Quality Gate") {
-
+        stage('Quality Gate') {
             steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
         
@@ -43,7 +42,7 @@ pipeline {
                 // Additional deployment steps can go here
             }
         }
-    
+    }
     
     post {
         success {
@@ -51,7 +50,6 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed! 😞'
-            }
         }
     }
 }
