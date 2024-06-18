@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "./node_modules/.bin/eslint ./src/api.js ./src/assets/base.css"
+    "lint": "./node_modules/.bin/eslint ./src/api.js ./src/assets/base.css",
+    "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
     "axios": "^1.2.0",
@@ -18,6 +19,7 @@
     "eslint": "^9.5.0",
     "eslint-plugin-vue": "^9.26.0",
     "globals": "^15.6.0",
+    "sonar-scanner": "^3.1.0",
     "vite": "^3.2.4"
   }
 }
