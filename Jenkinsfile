@@ -44,15 +44,10 @@ pipeline {
                 sh 'docker build -t chrisitornado/todos-frontend:latest .'
             }
         }
-
-        stage('Login') {
+        
+        stage('Deliver') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --pasword-stdin'
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
                 sh 'echo docker push chrisitornado/todos-frontend:latest'
             }
         }
