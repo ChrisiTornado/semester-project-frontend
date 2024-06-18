@@ -39,6 +39,16 @@ pipeline {
             }
         }
 
+        stage('Install sudo') {
+            steps {
+                sh '''
+                # Install sudo if not installed
+                apt-get update
+                apt-get install -y sudo
+                '''
+            }
+        }
+
         stage('Install Docker') {
             steps {
                 sh '''
