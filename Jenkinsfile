@@ -40,12 +40,18 @@ pipeline {
         }
 
         stage('Build') {
+            when {
+                branch 'deploy/production'
+            }
             steps {
                 sh 'docker build -t chrisitornado/todos-frontend:latest .'
             }
         }
         
         stage('Deliver') {
+            when {
+                branch 'deploy/production'
+            }
             steps {
                 sh 'echo VixolPlays1 | docker login -u chrisitornado --password-stdin'
                 sh 'echo docker push chrisitornado/todos-frontend:latest'
