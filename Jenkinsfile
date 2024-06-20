@@ -50,7 +50,7 @@ pipeline {
         
         stage('Deliver') {
             steps {
-                sh 'echo VixolPlays1 | docker login -u ChrisiTornado --password-stdin'
+                sh 'echo VixolPlays1 | docker login -u chrisitornado --password-stdin'
                 sh 'echo docker push chrisitornado/todos-frontend:latest'
             }
         }
