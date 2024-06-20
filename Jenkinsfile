@@ -5,8 +5,6 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('chrisitornado-dockerhub')
-        registry = "chrisitornado/todos-frontend"
-        registryCredential = '<dockerhub-credential-name>' 
     }
     
     stages {
@@ -50,7 +48,7 @@ pipeline {
         
         stage('Deliver') {
             steps {
-                sh 'echo VixolPlays1 | docker login -u chrisitornado --password-stdin'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'echo docker push chrisitornado/todos-frontend:latest'
             }
         }
