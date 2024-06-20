@@ -5,6 +5,8 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('chrisitornado-dockerhub')
+        registry = "chrisitornado/todos-frontend"
+        registryCredential = '<dockerhub-credential-name>' 
     }
     
     stages {
@@ -38,6 +40,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
 
         stage('Build') {
             steps {
