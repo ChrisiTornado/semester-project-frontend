@@ -69,8 +69,6 @@ pipeline {
            //             replyTo: '$DEFAULT_REPLYTO',
            //             to: '$DEFAULT_RECIPIENTS'
         }
-        always {
-            sh 'docker logout'
-        }
+        
     }
 }
