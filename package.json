@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "./node_modules/.bin/eslint ./src/api.js ./src/assets/base.css",
+    "lint": "./node_modules/.bin/eslint ./src/api.js ./src/assets/base.css ./src/api.js",
     "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
