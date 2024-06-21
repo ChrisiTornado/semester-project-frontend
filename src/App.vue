@@ -1,13 +1,21 @@
-<script setup>
-import TodoList from "@/components/TodoList.vue";
-</script>
-
 <template>
   <main>
-    <TodoList />
+    <router-view />
   </main>
 </template>
 
-<style scoped>
+<script>
+export default {
+  name: 'App',
+};
+</script>
 
+<style>
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
 </style>
