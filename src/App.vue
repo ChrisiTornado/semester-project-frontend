@@ -6,7 +6,7 @@ import TodoList from "@/components/TodoList.vue";
   <main>
     <TodoList />
   </main>
-</template>
+
 
 <style scoped>
 
