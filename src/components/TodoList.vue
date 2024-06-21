@@ -3,7 +3,7 @@
     <li>
       <TodoInput @new-todo="post" />
     </li>
-    <li v-for="(todo, i) in todos">
+    <li v-for="(todo, i) in sortedTodos" :key="todo.id">
       <Todo :todo="todo"
             @done="done"
             @undone="undone"
@@ -15,14 +15,24 @@
 <script>
 import Todo from "@/components/Todo.vue";
 import TodoInput from "@/components/TodoInput.vue";
-import {createTodo, doneTodo, readTodos, undoneTodo} from "@/api";
+import { createTodo, doneTodo, readTodos, undoneTodo } from "@/api";
 
 export default {
   name: "TodoList",
-  components: {TodoInput, Todo},
+  components: { TodoInput, Todo },
   data() {
     return {
       todos: []
+    };
+  },
+  computed: {
+    sortedTodos() {
+      // Sort todos so that undone todos come first
+      return this.todos.sort((a, b) => {
+        if (a.done && !b.done) return 1; // b (unfinished) comes before a (finished)
+        if (!a.done && b.done) return -1; // a (unfinished) comes before b (finished)
+        return 0; // Same status or both done/undone
+      });
     }
   },
   methods: {
@@ -41,18 +51,20 @@ export default {
       var todo = await undoneTodo(id);
       this.update(id, todo);
     },
-    update(id, todo) {
-      this.todos.forEach((value, i) => {
-        if (value.id === id) {
-          this.todos[i] = todo;
-        }
-      });
+    update(id, updatedTodo) {
+      // Update the specific todo in the list
+      const index = this.todos.findIndex(todo => todo.id === id);
+      if (index !== -1) {
+        this.todos.splice(index, 1, updatedTodo);
+      }
+      // Sort the todos after updating
+      this.todos = this.sortedTodos;
     }
   },
   created() {
     this.getAll();
   }
-}
+};
 </script>
 
 <style scoped>
@@ -60,3 +72,4 @@ ul {
   list-style-type: none;
 }
 </style>
+
