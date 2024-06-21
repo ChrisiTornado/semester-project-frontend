@@ -10,7 +10,7 @@
     "sonar-scanner": "node_modules/sonar-scanner/bin/sonar-scanner"
   },
   "dependencies": {
-    "axios": "^1.2.0",
+    "axios": "^1.7.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {
